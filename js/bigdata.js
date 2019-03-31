@@ -39,7 +39,7 @@ function initMap() {
     getStops().then(_ => _.json()).then(res => {
         console.log(res)
         for(let m of res) {
-            makeSpot(m.pos.lat, m.pos.long, desiredMap, m.stops)
+            makeSpot(m.pos.lat, m.pos.long, knownMap, m.stops)
         }
     })
 }
