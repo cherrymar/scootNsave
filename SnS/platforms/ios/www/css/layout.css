@@ -1,0 +1,100 @@
+html {
+    width: 100%;
+    height: 100%;
+}
+body {
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    flex-direction: column;
+    margin: 0px;
+    padding: 0px;
+    font-size: 16px;
+    font-family: sans-serif;
+    overflow-x: hidden;
+}
+
+#topcontainer {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+#header {
+    padding: 20px;
+    background-color: blue;
+}
+#map {
+    flex: 1;
+    background-color: #DDDDDD;
+    display: block;
+}
+#butt {
+    text-align: center;
+    padding: 5px 20px;
+}
+p {
+    margin: 5px 3px;
+    margin-bottom: 20px;
+}
+a.button {
+    display: inline-block;
+    height: 55px;
+    background-color: blue;
+    border-radius: 20px;
+    line-height: 55px;
+    font-size: 30px;
+    color: white;
+    text-decoration: none;
+    width: 100vw;
+    max-width: 350px;
+    text-align: center;
+    margin: 15px 0;
+}
+a.disabled-button {
+    border-radius: 0px;
+}
+a.good-park {
+    background-color: green;
+}
+a.bad-park {
+    background-color: red;
+}
+
+#nearestContainer {
+    background-color: #EEEEEE;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0px;
+    margin: 0px;
+    min-height: 5vh;
+    text-align: center;
+    justify-content: center;
+}
+
+#nearest404{
+    align-self: center;
+}
+
+#nearest {
+    display: none;
+}
+
+#nearest > div {
+    text-align: center;
+    max-height: 10vh;
+    padding: 5px 0px;
+}
+
+.nearestElement {
+    display: flex;
+    flex-direction: row;
+}
+
+.rackspacer{
+    width: 30vw;
+    height: 1px;
+}
+
+.racklabel{
+    margin-right: 10vw;
+}

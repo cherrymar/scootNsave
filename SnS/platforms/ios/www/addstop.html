@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Spot - Scoot 'n' Save</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/layout.css">
+	<link rel="shortcut icon" href="SnS_logo_resize.png"/>
+	<script src="js/api.js"></script>
+	<script src="js/addspot.js"></script>
+	<script src="js/ripple.min.js"></script>
+</head>
+
+<body>
+	<div id="topcontainer">
+		<div id="butt">
+			<h1>Add a escooter parking place</h1>
+			<p>Coordinates</p>
+			<input type="number" id="long" placeholder="longitude" value="-118.2437" oninput="updateSpot()" step="0.005"/>
+			<span>&nbsp;&nbsp</span>
+			<input type="number" id="lat" placeholder="latitude" value="34.0522" oninput="updateSpot()" step="0.005"/>
+			<br>
+			<a class="button ripple" href="javascript:createStop();">Create</a>
+		</div>
+		<div id="map"></div>
+	</div>
+	<script>
+		ripple.registerRipples()
+	</script>
+	<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_4_MtvydiWb4EZr8reK55Na1qgo55Nm4&callback=initMap"></script>
+</body>
+</html>
