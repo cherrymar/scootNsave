@@ -1,4 +1,4 @@
-const API_ROOT = 'http://127.0.0.1:3000/'
+const API_ROOT = 'http://lahacks19-84.appspot.com/'
 
 function getNearest(lat, long) {
     return new Promise((res, rej) => {
