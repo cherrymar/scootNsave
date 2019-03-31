@@ -1,4 +1,4 @@
-const API_ROOT = 'https://lahacks19-84.appspot.com/'
+const API_ROOT = 'http://localhost:3000/'//'https://lahacks19-84.appspot.com/'
 
 function getNearest(lat, long) {
     return new Promise((res, rej) => {
@@ -24,9 +24,12 @@ function addStop(lat, long) {
         fetch(API_ROOT+
             'addrack', {
                 method: 'POST',
-                body: {
+                body: JSON.stringify({
                     lat: lat,
                     long: long
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
                 }
             })
             .then(res)
