@@ -100,7 +100,7 @@ function setLocation(pos) {
 function handleLocationError(pos) {
     infoWindow = new google.maps.InfoWindow()
     infoWindow.setPosition(pos);
-    infoWindow.setContent('<div class="info">Error</div>');
+    infoWindow.setContent('Error: cannot get your location');
     infoWindow.open(map);
 }
 function onPark() {
