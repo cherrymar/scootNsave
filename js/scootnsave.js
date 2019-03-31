@@ -18,9 +18,9 @@ function initMap() {
 }
 
 function onLocate() {
-    navigator.geolocation.watchPosition( setLocation, onLocateErr, {
+    navigator.geolocation.watchPosition(setLocation, onLocateErr, {
         timeout: 1500
-    })    
+    })
 }
 function onLocateErr() {
     handleLocationError(map.getCenter())
@@ -28,11 +28,12 @@ function onLocateErr() {
 const markers = []
 
 function clrMarkers() {
-    for(let m of markers) {
+    for (let m of markers) {
         m.setMap(null)
     }
     markers.length = 0
 }
+
 let lat = 0
 let long = 0
 function setLocation(pos) {
@@ -45,8 +46,10 @@ function setLocation(pos) {
         clrMarkers()
 
         let counter = 0
+        let nearest404 = document.querySelector("#nearest404")
+        let nearest = document.querySelector("#nearest")
 
-        for(let m in closeBy) {
+        for (let m in closeBy) {
             console.log(m)
             let marker = new google.maps.Marker({
                 position: {
@@ -59,27 +62,28 @@ function setLocation(pos) {
             markers.push(marker)
             let childNode
 
-            if (counter < 5){
-                let dist = measure(lat, long, m.lat, m.long)
-                childNode = document.querySelector("#nearest").childNodes[counter]
-                nearest.style.display = "block"
-                nearest.childNodes[3].textContent = "Rack" + counter + '\t' + dist + "m"
+            if (counter < 5) {
+                let dist = Math.round(measure(lat, long, m.lat, m.long))
+                console.log(dist)
+                childNode = nearest.childNodes[2 * counter + 1]
+                flex(childNode)
+                childNode.childNodes[5].textContent = dist + " m away"
             }
             counter++
         }
 
         // show "no bikes found", hide list
-        if (counter == 0){
-            document.querySelector("#nearest404").style.display = "block";
-            document.querySelector("#nearest").style.display = "none";
-        
-        // hide "no bikes found", show list
+        if (counter == 0) {
+            show(nearest404)
+            hide(nearest)
+
+            // hide "no bikes found", show list
         } else {
-            document.querySelector("#nearest404").style.display = "none";
-            document.querySelector("#nearest").style.display = "block";
+            hide(nearest404)
+            show(nearest)
         }
-        while (counter < 5){
-            document.querySelector("#nearest").childNodes[counter].style.display = "none"
+        while (counter < 5) {
+            hide(nearest.childNodes[2 * counter + 1])
             counter++
         }
 
@@ -95,7 +99,7 @@ function setLocation(pos) {
         })
         markers.push(marker)
         //console.log(pos)
-        map.setCenter(p);
+        map.setCenter(p)
     })
 }
 
@@ -105,28 +109,39 @@ function handleLocationError(pos) {
     infoWindow.setContent('<div class="info">Error</div>');
     infoWindow.open(map);
 }
-
 function onPark() {
     stop(lat, long).then(r => {
-        r.text().then(s => {       
+        r.text().then(s => {
             let park = document.querySelector('#parkbutton')
             park.textContent = s
             park.className = 'button disabled-button'
             park.classList.add(r.ok ? 'good-park' : 'bad-park')
-            park.onclick = () => {}         
+            park.onclick = () => { }
             park.href = "#"
         })
     })
 }
 
-function measure(lat1, lon1, lat2, lon2){  // generally used geo measurement function
+function flex(element) {
+    element.style.display = "flex"
+}
+
+function show(element) {
+    element.style.display = "block"
+}
+
+function hide(element) {
+    element.style.display = "none"
+}
+
+function measure(lat1, lon1, lat2, lon2) {  // haversine formula
     var R = 6378.137; // Radius of earth in KM
     var dLat = lat2 * Math.PI / 180 - lat1 * Math.PI / 180;
     var dLon = lon2 * Math.PI / 180 - lon1 * Math.PI / 180;
-    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-    Math.sin(dLon/2) * Math.sin(dLon/2);
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     var d = R * c;
     return d * 1000; // meters
 }
