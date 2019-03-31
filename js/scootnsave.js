@@ -73,7 +73,7 @@ function setLocation(pos) {
         let nearest404 = document.querySelector("#nearest404")
         let nearest = document.querySelector("#nearest")
 
-        for (let m in closeBy) {
+        for (let m of closeBy) {
             // places marker at each nearby bike rack
             let marker = new google.maps.Marker({
                 position: {
@@ -125,8 +125,6 @@ function setLocation(pos) {
         map.setCenter(p)
     })
 }
-
-
 
 function handleLocationError(pos) {
     infoWindow = new google.maps.InfoWindow()
