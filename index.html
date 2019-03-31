@@ -1,25 +1,61 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Scoot n Save</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">        
-        <link rel="stylesheet" href="css/layout.css">
-        <script src="js/api.js"></script>
-        <script src="js/scootnsave.js"></script>
-        <script src="js/ripple.min.js"></script>
-    </head>
-    <body>
-        <div id="map">
-            
-        </div>
-        <div id="butt">
-            <a class="button ripple" id="parkbutton" href="javascript:onPark();">Park</a>
-            <p>Press the button when you've stopped. Park at a bike rack to earn rewards</p>
-            <p>Scoot n Save v1</p>
-        </div>
-        <script>
-            ripple.registerRipples()
-        </script>
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_4_MtvydiWb4EZr8reK55Na1qgo55Nm4&callback=initMap"></script>
-    </body>
+
+<head>
+	<title>Scoot 'n Save</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/layout.css">
+	<script src="js/api.js"></script>
+	<script src="js/scootnsave.js"></script>
+	<script src="js/ripple.min.js"></script>
+</head>
+
+<body>
+
+	<div id="topcontainer">
+		<div id="map"></div>
+		<div id="butt">
+			<a class="button ripple" id="parkbutton" href="javascript:onPark();">Park</a>
+			<p>Press the button when you've stopped. Park at a bike rack to earn rewards!</p>
+			<!--<p>© Scoot 'n Save 2019</p>-->
+		</div>
+	</div>
+	<div id="nearestContainer">
+		<div id="nearest404">No bike racks close by</div>
+		<div id="nearest">
+			<div class="nearestElement">
+				<div class="rackspacer"></div>
+				<div class="racklabel">Rack 1: </div>
+				<div>1 m</div>
+			</div>
+			<div class="nearestElement">
+				<div class="rackspacer"></div>
+				<div class="racklabel">Rack 2: </div>
+				<div>100000 m</div>
+			</div>
+			<div class="nearestElement">
+				<div class="rackspacer"></div>
+				<div class="racklabel">Rack 3: </div>
+				<div></div>
+			</div>
+			<div class="nearestElement">
+				<div class="rackspacer"></div>
+				<div class="racklabel">Rack 4: </div>
+				<div></div>
+			</div>
+			<div class="nearestElement">
+				<div class="rackspacer"></div>
+				<div class="racklabel">Rack 5: </div>
+				<div></div>
+			</div>
+		</div>
+
+	</div>
+	<script>
+		ripple.registerRipples()
+	</script>
+	<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_4_MtvydiWb4EZr8reK55Na1qgo55Nm4&callback=initMap"></script>
+</body>
+
 </html>

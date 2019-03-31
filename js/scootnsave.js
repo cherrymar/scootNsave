@@ -57,12 +57,32 @@ function setLocation(pos) {
                 title: m.type
             })
             markers.push(marker)
+            let childNode
 
-            /*if (counter < 5){
-                idist = measure(lat, long, m.lat, m.long)
-                document.querySelector("#map")
-            }*/
-        }        
+            if (counter < 5){
+                let dist = measure(lat, long, m.lat, m.long)
+                childNode = document.querySelector("#nearest").childNodes[counter]
+                nearest.style.display = "block"
+                nearest.childNodes[3].textContent = "Rack" + counter + '\t' + dist + "m"
+            }
+            counter++
+        }
+
+        // show "no bikes found", hide list
+        if (counter == 0){
+            document.querySelector("#nearest404").style.display = "block";
+            document.querySelector("#nearest").style.display = "none";
+        
+        // hide "no bikes found", show list
+        } else {
+            document.querySelector("#nearest404").style.display = "none";
+            document.querySelector("#nearest").style.display = "block";
+        }
+        while (counter < 5){
+            document.querySelector("#nearest").childNodes[counter].style.display = "none"
+            counter++
+        }
+
         //draw self
         var p = {
             lat: lat,
