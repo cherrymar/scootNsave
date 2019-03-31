@@ -36,8 +36,8 @@ function clrMarkers() {
     markers.length = 0
 }
 
-let lat
-let long
+let lat = 0
+let long = 0
 function setLocation(pos) {
     lat = pos.coords.latitude
     long = pos.coords.longitude
