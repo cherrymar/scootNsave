@@ -34,13 +34,10 @@ function clrMarkers() {
     markers.length = 0
 }
 
-let lat = 0
-let long = 0
-function setLocation(pos) {
-    console.log(pos)
-    lat = pos.coords.latitude
-    long = pos.coords.longitude
 
+function setLocation(pos) {
+    let lat = pos.coords.latitude
+    let long = pos.coords.longitude
 
     getNearest(lat, long).then((closeBy) => {
         clrMarkers()
@@ -50,7 +47,6 @@ function setLocation(pos) {
         let nearest = document.querySelector("#nearest")
 
         for (let m in closeBy) {
-            console.log(m)
             let marker = new google.maps.Marker({
                 position: {
                     lat: m.lat,
@@ -64,7 +60,6 @@ function setLocation(pos) {
 
             if (counter < 5) {
                 let dist = Math.round(measure(lat, long, m.lat, m.long))
-                console.log(dist)
                 childNode = nearest.childNodes[2 * counter + 1]
                 flex(childNode)
                 childNode.childNodes[5].textContent = dist + " m away"
@@ -98,7 +93,6 @@ function setLocation(pos) {
             title: 'You are here'
         })
         markers.push(marker)
-        //console.log(pos)
         map.setCenter(p)
     })
 }
