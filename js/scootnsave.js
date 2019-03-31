@@ -1,6 +1,7 @@
 let map
 function initMap() {
     map = new google.maps.Map(document.querySelector('#map'), {
+        // defaults to center of LA
         center: { lat: 34.0522, lng: -118.2437 },
         zoom: 16,
         streetViewControl: false,
@@ -25,6 +26,7 @@ function onLocate() {
 function onLocateErr() {
     handleLocationError(map.getCenter())
 }
+
 const markers = []
 
 function clrMarkers() {
@@ -33,7 +35,6 @@ function clrMarkers() {
     }
     markers.length = 0
 }
-
 
 function setLocation(pos) {
     let lat = pos.coords.latitude
@@ -47,6 +48,7 @@ function setLocation(pos) {
         let nearest = document.querySelector("#nearest")
 
         for (let m in closeBy) {
+            // places marker at each nearby bike rack
             let marker = new google.maps.Marker({
                 position: {
                     lat: m.lat,
@@ -58,6 +60,7 @@ function setLocation(pos) {
             markers.push(marker)
             let childNode
 
+            // Adds to list
             if (counter < 5) {
                 let dist = Math.round(measure(lat, long, m.lat, m.long))
                 childNode = nearest.childNodes[2 * counter + 1]
@@ -72,7 +75,7 @@ function setLocation(pos) {
             show(nearest404)
             hide(nearest)
 
-            // hide "no bikes found", show list
+        // hide "no bikes found", show list
         } else {
             hide(nearest404)
             show(nearest)
@@ -100,9 +103,10 @@ function setLocation(pos) {
 function handleLocationError(pos) {
     infoWindow = new google.maps.InfoWindow()
     infoWindow.setPosition(pos);
-    infoWindow.setContent('Error: cannot get your location');
+    infoWindow.setContent('Error: Cannot Get Location');
     infoWindow.open(map);
 }
+
 function onPark() {
     stop(lat, long).then(r => {
         r.text().then(s => {
