@@ -62,6 +62,7 @@ function clrMarkers() {
 
 let lat = 0
 let long = 0
+const markerImg = 'https://raw.githubusercontent.com/cherrymar/scootNsave/master/SnS_logo_resize.png'
 function setLocation(pos) {
     lat = pos.coords.latitude
     long = pos.coords.longitude
@@ -77,18 +78,20 @@ function setLocation(pos) {
             // places marker at each nearby bike rack
             let marker = new google.maps.Marker({
                 position: {
-                    lat: m.lat,
-                    lng: m.long
+                    lat: m.pos.lat,
+                    lng: m.pos.long
                 },
                 map: map,
-                title: m.type
+                title: m.type,
+                label: 'P'
             })
             markers.push(marker)
             let childNode
 
             // Adds to list
             if (counter < 5) {
-                let dist = Math.round(measure(lat, long, m.lat, m.long))
+                const havershim = measure(lat, long, m.pos.lat, m.pos.long)
+                let dist = Math.round(havershim)
                 childNode = nearest.childNodes[2 * counter + 1]
                 flex(childNode)
                 childNode.childNodes[5].textContent = dist + " m away"
