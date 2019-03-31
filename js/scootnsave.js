@@ -36,9 +36,11 @@ function clrMarkers() {
     markers.length = 0
 }
 
+let lat
+let long
 function setLocation(pos) {
-    let lat = pos.coords.latitude
-    let long = pos.coords.longitude
+    lat = pos.coords.latitude
+    long = pos.coords.longitude
 
     getNearest(lat, long).then((closeBy) => {
         clrMarkers()
