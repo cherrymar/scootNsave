@@ -26,6 +26,9 @@ section {
 p {
     margin: 5px 5px;
 }
+.stat {
+    margin-left: 10px;
+}
 .good {
     color: green;
 }
