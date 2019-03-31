@@ -24,9 +24,12 @@ function addStop(lat, long) {
         fetch(API_ROOT+
             'addrack', {
                 method: 'POST',
-                body: {
+                body: JSON.stringify({
                     lat: lat,
                     long: long
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
                 }
             })
             .then(res)
