@@ -19,3 +19,41 @@ function stop(lat, long) {
             .catch(rej)
     })
 }
+function addStop(lat, long) {
+    return new Promise((res, rej) => {
+        fetch(API_ROOT+
+            'addrack', {
+                method: 'POST',
+                body: {
+                    lat: lat,
+                    long: long
+                }
+            })
+            .then(res)
+            .catch(rej)
+    })
+}
+function listBadStops() {
+    return new Promise((res, rej) => {
+        fetch(API_ROOT+
+            'badstops')
+            .then(res)
+            .catch(rej)
+    })
+}
+function getStops() {
+    return new Promise((res, rej) => {
+        fetch(API_ROOT+
+            'stops')
+            .then(res)
+            .catch(rej)
+    })
+}
+function getStats() {
+    return new Promise((res, rej) => {
+        fetch(API_ROOT+
+            'stats')
+            .then(res)
+            .catch(rej)
+    })
+}
