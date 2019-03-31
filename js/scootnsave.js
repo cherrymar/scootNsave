@@ -1,3 +1,28 @@
+var getPosition = function (options) {
+    return new Promise(function (resolve, reject) {
+        navigator.geolocation.getCurrentPosition(resolve, reject, options);
+    });
+}
+
+function timeout(ms, promise) {
+    return new Promise(function (resolve, reject) {
+        // create a timeout to reject promise if not resolved
+        var timer = setTimeout(function () {
+            reject(new Error("promise timeout"));
+        }, ms);
+
+        promise
+            .then(function (res) {
+                clearTimeout(timer);
+                resolve(res);
+            })
+            .catch(function (err) {
+                clearTimeout(timer);
+                reject(err);
+            });
+    });
+}
+
 let map
 function initMap() {
     map = new google.maps.Map(document.querySelector('#map'), {
@@ -9,13 +34,11 @@ function initMap() {
         fullscreenControl: false
     });
 
-
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(onLocate, onLocateErr);
-    }
-    else {
-        onLocateErr()
-    }
+    timeout(3000, getPosition()
+    .then(navigator.geolocation.getCurrentPosition(onLocate, onLocateErr))
+    .catch(onLocateErr))
+    .then(navigator.geolocation.getCurrentPosition(onLocate, onLocateErr)) // not sure if this line is necessary
+    .catch(onLocateErr)
 }
 
 function onLocate() {
@@ -23,6 +46,7 @@ function onLocate() {
         timeout: 1500
     })
 }
+
 function onLocateErr() {
     handleLocationError(map.getCenter())
 }
@@ -101,6 +125,8 @@ function setLocation(pos) {
         map.setCenter(p)
     })
 }
+
+
 
 function handleLocationError(pos) {
     infoWindow = new google.maps.InfoWindow()
